@@ -16,7 +16,7 @@ public class SignupOne extends JFrame implements ActionListener {
     JRadioButton male, female, married, unmarried, other;
     public SignupOne() {
 
-        setTitle("Sign up Form");
+        setTitle("Page 1 : Sign up Form");
         setSize(700, 800);
         setLayout(null);
 
