@@ -193,7 +193,7 @@ public class SignupOne extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Are you without name?");
             } else {
                 Conn c = new Conn();
-                String query = "insert into signup values('"+formno+"', '"+name+"', '"+fname+"', '"+dob+"', '"+email+"', '"+address+"', '"+city+"', '"+state+"', '"+pin+"', '"+gender+"', '"+marital+"'";
+                String query = "insert into signup values('"+formno+"', '"+name+"', '"+fname+"', '"+dob+"', '"+email+"', '"+address+"', '"+city+"', '"+state+"', '"+pin+"', '"+gender+"', '"+marital+"')";
                 c.s.executeUpdate(query);
             }
 

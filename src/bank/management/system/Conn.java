@@ -7,7 +7,7 @@ public class Conn {
     public Conn() {
         try {
             //Class.forName(com.mysql.cj.jdbc.Driver); register the driver
-            c = DriverManager.getConnection("jdbc:mysql://bankmanagementsystem", "root", "mc@futbol"); // create connection
+            c = DriverManager.getConnection("jdbc:mysql:///bankmanagementsystem", "root", "mc@futbol"); // create connection
             s = c.createStatement(); // crate statement
 
 
