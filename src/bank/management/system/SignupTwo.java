@@ -1,14 +1,17 @@
 package bank.management.system;
 
-import com.toedter.calendar.JDateChooser;
-
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class SignupTwo extends JFrame {
-    JTextField categoryTextField, qualificationTextField, incomeTextField,
-            educationTextField, occupationTextField, panTextField, aadharTextField;
-    public SignupTwo() {
+public class SignupTwo extends JFrame implements ActionListener {
+    JTextField panTextField, aadharTextField;
+    JComboBox religionDropDown,categoryDropDown, incomeDropDown,eduDropDown, occupationDropDown;
+    JRadioButton sYes, sNo, eYes, eNo;
+    String formno;
+    public SignupTwo(String formno) {
+        this.formno = formno;
 
         setSize(700, 800);
         setTitle("Page 2 : Sign up form");
@@ -24,7 +27,7 @@ public class SignupTwo extends JFrame {
         religion.setFont(new Font("Ariel", Font.BOLD, 16));
         add(religion);
         String[] listReligion = {"Muslim", "Hindu", "Christian", "Parsi", "Sikh", "other"};
-        JComboBox religionDropDown = new JComboBox(listReligion);
+        religionDropDown = new JComboBox(listReligion);
         religionDropDown.setBounds(300, 150, 300, 30);
         religionDropDown.setBackground(Color.white);
         add(religionDropDown);
@@ -34,7 +37,7 @@ public class SignupTwo extends JFrame {
         category.setFont(new Font("Ariel", Font.BOLD, 16));
         add(category);
         String[] valCategory = {"General", "Sc", "ST", "RBA", "OBC", "Other"};
-        JComboBox categoryDropDown = new JComboBox(valCategory);
+        categoryDropDown = new JComboBox(valCategory);
         categoryDropDown.setBounds(300, 190, 300, 30);
         categoryDropDown.setBackground(Color.white);
         add(categoryDropDown);
@@ -45,7 +48,7 @@ public class SignupTwo extends JFrame {
         income.setFont(new Font("Ariel", Font.BOLD, 16));
         add(income);
         String[] incomeCategory = {"Null", "< 1,50,000", "< 2,50,000", "< 5,00,000", "Upto 10,00,000", "> 10,00,000"};
-        JComboBox incomeDropDown = new JComboBox(incomeCategory);
+        incomeDropDown = new JComboBox(incomeCategory);
         incomeDropDown.setBounds(300, 230, 300, 30);
         incomeDropDown.setBackground(Color.white);
         add(incomeDropDown);
@@ -60,7 +63,7 @@ public class SignupTwo extends JFrame {
         qualification.setFont(new Font("Ariel", Font.BOLD, 16));
         add(qualification);
         String[] eduVal = {"Under Graduate", "Graduate", "Post-Graduate", "Phd", "Doctrate", "Other"};
-        JComboBox eduDropDown = new JComboBox(eduVal);
+        eduDropDown = new JComboBox(eduVal);
         eduDropDown.setBounds(300, 295, 300, 30);
         eduDropDown.setBackground(Color.white);
         add(eduDropDown);
@@ -70,7 +73,7 @@ public class SignupTwo extends JFrame {
         occupation.setFont(new Font("Ariel", Font.BOLD, 16));
         add(occupation);
         String[] occupationVal = {"Student", "Salaried", "Business", "Retired", "Other"};
-        JComboBox occupationDropDown = new JComboBox(occupationVal);
+        occupationDropDown = new JComboBox(occupationVal);
         occupationDropDown.setBounds(300, 350, 300, 30);
         occupationDropDown.setBackground(Color.white);
         add(occupationDropDown);
@@ -97,11 +100,11 @@ public class SignupTwo extends JFrame {
         sCitizen.setBounds(120, 470, 150, 40);
         sCitizen.setFont(new Font("Ariel", Font.BOLD, 16));
         add(sCitizen);
-        JRadioButton sYes = new JRadioButton("Yes");
-        sYes.setBounds(300, 470, 70, 20);
+        sYes = new JRadioButton("Yes");
+        sYes.setBounds(300, 480, 70, 20);
         sYes.setBackground(Color.white);
         add(sYes);
-        JRadioButton sNo = new JRadioButton("N0");
+        sNo = new JRadioButton("N0");
         sNo.setBounds(380, 480, 70, 20);
         sNo.setBackground(Color.white);
         add(sNo);
@@ -113,17 +116,25 @@ public class SignupTwo extends JFrame {
         eAccount.setBounds(120, 510, 150, 40);
         eAccount.setFont(new Font("Ariel", Font.BOLD, 16));
         add(eAccount);
-        JRadioButton eYes = new JRadioButton("Yes");
+        eYes = new JRadioButton("Yes");
         eYes.setBounds(300, 520, 70, 20);
         eYes.setBackground(Color.white);
-        add(sYes);
-        JRadioButton eNo = new JRadioButton("N0");
+        add(eYes);
+        eNo = new JRadioButton("N0");
         eNo.setBounds(380, 520, 70, 20);
         eNo.setBackground(Color.white);
         add(eNo);
         ButtonGroup eAccountGroup = new ButtonGroup();
-        sCitizenGroup.add(eYes);
-        sCitizenGroup.add(eNo);
+        eAccountGroup.add(eYes);
+        eAccountGroup.add(eNo);
+
+        JButton finish = new JButton("Finish");
+        finish.setBackground(Color.black);
+        finish.setForeground(Color.white);
+        finish.setBounds(500, 570, 100, 30);
+        finish.setFont(new Font("Ariel", Font.BOLD, 14));
+        finish.addActionListener(this);
+        add(finish);
 
 
         getContentPane().setBackground(Color.white);
@@ -135,6 +146,39 @@ public class SignupTwo extends JFrame {
     }
 
     public static void main(String[] args) {
-        new SignupTwo();
+        new SignupTwo("");
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        String pan = panTextField.getText();
+        String adhar = aadharTextField.getText();
+
+        String sReligion = (String) religionDropDown.getSelectedItem();
+        String sCategory = (String) categoryDropDown.getSelectedItem();
+        String sIncome = (String) incomeDropDown.getSelectedItem();
+        String sEdu = (String) eduDropDown.getSelectedItem();
+        String sOccupation = (String) occupationDropDown.getSelectedItem();
+
+        String sCitizen  = null;
+        if(sYes.isSelected()) {
+            sCitizen = "Yes";
+        } else if(sNo.isSelected()) {
+            sCitizen = "No";
+        }
+        String eAccount = null;
+        if(eYes.isSelected()) {
+            eAccount = "Yes";
+        } else if (eNo.isSelected()) {
+            eAccount = "No";
+        }
+
+        try {
+            Conn c = new Conn();
+            String query = "insert into signuptwo values ('"+formno+"', '"+sReligion+"', '"+sCategory+"', '"+sEdu+"', '"+sIncome+"', '"+sOccupation+"', '"+pan+"', '"+adhar+"', '"+sCitizen+"', '"+eAccount+"')";
+            c.s.executeUpdate(query);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }
