@@ -5,13 +5,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
+import java.util.Map;
 
 public class SignupThree extends JFrame implements ActionListener {
     JRadioButton saving, current, fixed, recurring;
     JCheckBox c1, c2, c3, c4, c5, c6, c7;
     JButton submit, cancel;
-    public SignupThree() {
+    String formno;
+    public SignupThree(String formno) {
 
+        this.formno = formno;
         setLayout(null);
 
         JLabel heading = new JLabel("Page 3 : Account Details");
@@ -120,6 +123,7 @@ public class SignupThree extends JFrame implements ActionListener {
         cancel.setForeground(Color.white);
         cancel.setBounds(350, 500, 150, 40);
         cancel.setFont(new Font("Ariel", Font.BOLD, 16));
+        cancel.addActionListener(this);
         add(cancel);
 
         submit = new JButton("Submit");
@@ -127,6 +131,7 @@ public class SignupThree extends JFrame implements ActionListener {
         submit.setForeground(Color.white);
         submit.setBounds(550, 500, 150, 40);
         submit.setFont(new Font("Ariel", Font.BOLD, 16));
+        submit.addActionListener(this);
         add(submit);
 
         getContentPane().setBackground(Color.white);
@@ -140,9 +145,57 @@ public class SignupThree extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
+        if(ae.getSource() == submit) {
+            String accountType = null;
+            if(saving.isSelected()) {
+                accountType = "Saving";
+            } else if(current.isSelected()) {
+                accountType = "Current";
+            } else if(fixed.isSelected()) {
+                accountType = "Fixed";
+            } else if(recurring.isSelected()) {
+                accountType = "Recurring";
+            }
 
+            String cardNumber = "078104100000" + (int)((Math.random() * 9999) + 1000);
+            String pinNumber = "" + (int)((Math.random() * 9999) + 1000);
+
+            String facility = "";
+            if(c1.isSelected()) {
+                facility += "Atm card";
+            } else if(c2.isSelected()) {
+                facility += " Internet banking";
+            } else if(c3.isSelected()) {
+                facility += " Mobile banking";
+            } else if(c4.isSelected()) {
+                facility += " SMS Alert";
+            } else if(c5.isSelected()) {
+                facility += " Cheque book";
+            } else if(c6.isSelected()) {
+                facility += " E-Statement";
+            }
+
+            try {
+                if(accountType == "") {
+                    JOptionPane.showMessageDialog(null, "Account type is required");
+                } else {
+                    Conn c = new Conn();
+                    String query1 = "insert into signupthree values ('"+formno+"', '"+accountType+"', '"+cardNumber+"', '"+pinNumber+"', '"+facility+"')";
+                    String query2 = "insert into login values ('"+cardNumber+"', '"+pinNumber+"')";
+                    JOptionPane.showMessageDialog(null, "Account Number: " + cardNumber + "\nPin: " + pinNumber);
+                    c.s.executeUpdate(query1);
+                    c.s.executeUpdate(query2);
+                }
+
+            } catch (Exception e){
+                System.out.println(e);
+            }
+
+        } else if(ae.getSource() == cancel) {
+
+        }
     }
     public static void main(String[] args) {
-        new SignupThree();
+        new SignupThree("");
     }
 }
