@@ -128,13 +128,13 @@ public class SignupTwo extends JFrame implements ActionListener {
         eAccountGroup.add(eYes);
         eAccountGroup.add(eNo);
 
-        JButton finish = new JButton("Finish");
-        finish.setBackground(Color.black);
-        finish.setForeground(Color.white);
-        finish.setBounds(500, 570, 100, 30);
-        finish.setFont(new Font("Ariel", Font.BOLD, 14));
-        finish.addActionListener(this);
-        add(finish);
+        JButton next = new JButton("Finish");
+        next.setBackground(Color.black);
+        next.setForeground(Color.white);
+        next.setBounds(500, 570, 100, 30);
+        next.setFont(new Font("Ariel", Font.BOLD, 14));
+        next.addActionListener(this);
+        add(next);
 
 
         getContentPane().setBackground(Color.white);

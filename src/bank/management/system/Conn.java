@@ -10,8 +10,6 @@ public class Conn {
             c = DriverManager.getConnection("jdbc:mysql:///bankmanagementsystem", "root", "mc@futbol"); // create connection
             s = c.createStatement(); // crate statement
 
-
-
         } catch (Exception e) {
             System.out.println(e);
         }
