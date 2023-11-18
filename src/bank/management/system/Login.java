@@ -3,6 +3,7 @@ package bank.management.system;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
 
 public class Login extends JFrame implements ActionListener {
 
@@ -80,14 +81,30 @@ public class Login extends JFrame implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == clear) {
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == clear) {
             textFieldCard.setText("");
             textFieldPin.setText("");
-        } else if (e.getSource() == login) {
+        } else if (ae.getSource() == login) {
+            Conn c = new Conn();
+            String accNum = textFieldCard.getText();
+            String pinNum = textFieldPin.getText();
+            String query = "select * from login where account_number = " + accNum + " and pin = " + pinNum;
 
+            try {
+                ResultSet rs = c.s.executeQuery(query);
+                if(rs.next()) {
+                    setVisible(false);
+                    new Transaction(pinNum).setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "User doesn't exit");
+                }
 
-        } else if (e.getSource() == signup) {
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+        } else if (ae.getSource() == signup) {
             setVisible(false);
             new SignupOne().setVisible(true);
         }
