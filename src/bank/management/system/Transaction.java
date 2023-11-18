@@ -32,32 +32,32 @@ public class Transaction extends JFrame implements ActionListener {
 
         withdrawal = new JButton("Cash Withdrawal");
         withdrawal.setBounds(305, 325, 150, 22);
-        deposit.addActionListener(this);
+        withdrawal.addActionListener(this);
         image.add(withdrawal);
 
         fastCash = new JButton("Fast Cash");
         fastCash.setBounds(145, 350, 150, 22);
-        deposit.addActionListener(this);
+        fastCash.addActionListener(this);
         image.add(fastCash);
 
         miniS = new JButton("Mini Statement");
         miniS.setBounds(305, 350, 150, 22);
-        deposit.addActionListener(this);
+        miniS.addActionListener(this);
         image.add(miniS);
 
         pinChange = new JButton("Pin Change");
         pinChange.setBounds(145, 375, 150, 22);
-        deposit.addActionListener(this);
+        pinChange.addActionListener(this);
         image.add(pinChange);
 
         balance = new JButton("Check Balance");
         balance.setBounds(305, 375, 150, 22);
-        deposit.addActionListener(this);
+        balance.addActionListener(this);
         image.add(balance);
 
         exit = new JButton("Exit");
         exit.setBounds(305, 400, 150, 22);
-        deposit.addActionListener(this);
+        exit.addActionListener(this);
         image.add(exit);
 
         setSize(800, 700);
@@ -69,9 +69,7 @@ public class Transaction extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == exit) {
-            System.exit(0);
-        } else if(ae.getSource() == deposit) {
+        if (ae.getSource() == deposit) {
             setVisible(false);
             new Deposit(pinNum).setVisible(true);
         }

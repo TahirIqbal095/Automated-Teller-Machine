@@ -40,7 +40,7 @@ public class Deposit extends JFrame implements ActionListener {
 
         back = new JButton("Back");
         back.setBounds(180, 350, 100, 20);
-        deposit.addActionListener(this);
+        back.addActionListener(this);
         image.add(back);
 
         setSize(800, 700);
@@ -57,7 +57,7 @@ public class Deposit extends JFrame implements ActionListener {
             String totalAmount = amount.getText();
             Date date = new Date();
             try {
-                if(totalAmount.equals("")) {
+                if(totalAmount.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Please enter the amount");
                 } else {
                     Conn c = new Conn();
@@ -71,8 +71,8 @@ public class Deposit extends JFrame implements ActionListener {
             catch(Exception e) {
                 System.out.println(e);
             }
-
-        } else if (ae.getSource() == back) {
+        }
+        else if (ae.getSource() == back) {
             setVisible(false);
             new Transaction(pinNum).setVisible(true);
         }
