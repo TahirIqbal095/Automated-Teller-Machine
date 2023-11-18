@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Transaction extends JFrame implements ActionListener {
-    JButton exit;
+    JButton exit, deposit, withdrawal, miniS, fastCash, pinChange, balance;
     String pinNum;
     public Transaction(String pinNum) {
         this.pinNum = pinNum;
@@ -25,32 +25,32 @@ public class Transaction extends JFrame implements ActionListener {
         heading.setForeground(Color.white);
         image.add(heading);
 
-        JButton deposit = new JButton("Deposit");
+        deposit = new JButton("Deposit");
         deposit.setBounds(145, 325, 150, 22);
         deposit.addActionListener(this);
         image.add(deposit);
 
-        JButton withdrawal = new JButton("Cash Withdrawal");
+        withdrawal = new JButton("Cash Withdrawal");
         withdrawal.setBounds(305, 325, 150, 22);
         deposit.addActionListener(this);
         image.add(withdrawal);
 
-        JButton fastCash = new JButton("Fast Cash");
+        fastCash = new JButton("Fast Cash");
         fastCash.setBounds(145, 350, 150, 22);
         deposit.addActionListener(this);
         image.add(fastCash);
 
-        JButton miniS = new JButton("Mini Statement");
+        miniS = new JButton("Mini Statement");
         miniS.setBounds(305, 350, 150, 22);
         deposit.addActionListener(this);
         image.add(miniS);
 
-        JButton pinChange = new JButton("Pin Change");
+        pinChange = new JButton("Pin Change");
         pinChange.setBounds(145, 375, 150, 22);
         deposit.addActionListener(this);
         image.add(pinChange);
 
-        JButton balance = new JButton("Check Balance");
+        balance = new JButton("Check Balance");
         balance.setBounds(305, 375, 150, 22);
         deposit.addActionListener(this);
         image.add(balance);
@@ -64,6 +64,7 @@ public class Transaction extends JFrame implements ActionListener {
         setUndecorated(true);
         setVisible(true);
         setLocationRelativeTo(null);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
