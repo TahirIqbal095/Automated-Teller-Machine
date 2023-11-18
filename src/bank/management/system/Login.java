@@ -14,11 +14,11 @@ public class Login extends JFrame implements ActionListener {
         setTitle("Automated teller machine");
 
         // setting up the logo
+        setLayout(null);
         ImageIcon img1 = new ImageIcon(ClassLoader.getSystemResource("icons/logo.jpg"));
         Image img2 = img1.getImage().getScaledInstance(100,100,Image.SCALE_DEFAULT);
         ImageIcon img3 = new ImageIcon(img2);
         JLabel label = new JLabel(img3);
-        setLayout(null);
         label.setBounds(60, 20, 100, 100);
         add(label);
 
@@ -82,26 +82,31 @@ public class Login extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
+        String accNum = textFieldCard.getText();
+        String pinNum = textFieldPin.getText();
         if (ae.getSource() == clear) {
             textFieldCard.setText("");
             textFieldPin.setText("");
         } else if (ae.getSource() == login) {
-            Conn c = new Conn();
-            String accNum = textFieldCard.getText();
-            String pinNum = textFieldPin.getText();
-            String query = "select * from login where account_number = " + accNum + " and pin = " + pinNum;
+            if(accNum.isEmpty() || pinNum.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please enter both account and pin number");
+            }
+            else {
+                Conn c = new Conn();
+                String query = "select * from login where account_number = " + accNum + " and pin = " + pinNum;
 
-            try {
-                ResultSet rs = c.s.executeQuery(query);
-                if(rs.next()) {
-                    setVisible(false);
-                    new Transaction(pinNum).setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(null, "User doesn't exit");
+                try {
+                    ResultSet rs = c.s.executeQuery(query);
+                    if(rs.next()) {
+                        setVisible(false);
+                        new Transaction(pinNum).setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "User doesn't exit");
+                    }
+
+                } catch (Exception e) {
+                    System.out.println(e);
                 }
-
-            } catch (Exception e) {
-                System.out.println(e);
             }
 
         } else if (ae.getSource() == signup) {
