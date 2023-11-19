@@ -157,8 +157,8 @@ public class SignupThree extends JFrame implements ActionListener {
                 accountType = "Recurring";
             }
 
-            String cardNumber = "078104100000" + (int)((Math.random() * 9999) + 1000);
-            String pinNumber = "" + (int)((Math.random() * 9999) + 1000);
+            String cardNumber = "078104100000" + (int)((Math.random() * 8999) + 1000);
+            String pinNumber = "" + (int)((Math.random() * 8999) + 1000);
 
             String facility = "";
             if(c1.isSelected()) {
